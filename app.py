@@ -6,6 +6,7 @@ from flask import Flask, request, Response, render_template
 import threading
 import json
 import requests
+import os
 
 app = Flask(__name__)
 
@@ -71,7 +72,7 @@ def conversation():
     m = json_data.get('conversationId')
     t = json_data.get('parentMessageId')
     if t==None:
-        t=json.loads(requests.get("https://poeuser.cfcors.workers.dev/getGPT3").text)["_id"]
+        t=json.loads(requests.get(os.getenv("POE_BASE_URL")+"/getGPT3").text)["_id"]
         #t = quora.Account.get()
         #sleep(2) 
     if m==None:
@@ -92,7 +93,7 @@ def poeconv():
     m = json_data.get('conversationId')
     t = json_data.get('parentMessageId')
     if t==None:
-        t=json.loads(requests.get("https://poeuser.cfcors.workers.dev/getGPT4").text)["_id"]
+        t=json.loads(requests.get(os.getenv("POE_BASE_URL")+"/getGPT4").text)["_id"]
         #sleep(2)
  
     if m==None:
