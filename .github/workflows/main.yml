@@ -1,0 +1,21 @@
+name: Fly Deploy
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+
+jobs:
+  deploy:
+      name: Deploy app
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v2
+        - uses: superfly/flyctl-actions/setup-flyctl@master
+        - run: |
+            flyctl secrets set POE_BASE_URL=${{ secrets.POE_BASE_URL }} -a ${{ secrets.FLY_APP }}
+            flyctl deploy -a ${{ secrets.FLY_APP }}
+          env:
+            FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
