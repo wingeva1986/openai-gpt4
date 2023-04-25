@@ -4,15 +4,23 @@
 
 more gpt4 models in `/testing/ora_gpt4.py`
 
+find the userid by visiting https://ora.sh/api/auth/session ( must be logged in on the site )   
+and session_token in the cookies, it should be: __Secure-next-auth.session-token
+
 ```python
+# if using CompletionModel.load set these
+ora.user_id = '...'
+ora.session_token = '...'
+
 # normal gpt-4: b8b12eaa-5d47-44d3-92a6-4d706f2bcacf
 model = ora.CompletionModel.load(chatbot_id, 'gpt-4') # or gpt-3.5
 ```
 
 #### create model / chatbot: 
 ```python
-# inport ora
+# import ora
 import ora
+
 
 # create model
 model = ora.CompletionModel.create(
