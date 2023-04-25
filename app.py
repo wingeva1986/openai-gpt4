@@ -46,7 +46,7 @@ def conversation():
         #t = quora.Account.get()
         #sleep(2) 
     if m==None:
-        m = 'gpt-3.5-turbo'
+        m = 'ChatGPT'
     event=json.dumps({"conversationId":m,"parentMessageId":t})
     def event_stream(m,q,t):
         for text in ask(m,q,t):  
@@ -67,7 +67,7 @@ def poeconv():
         #sleep(2)
  
     if m==None:
-        m = 'gpt-4'#'gpt-3.5-turbo'
+        m = 'GPT-4'#'gpt-3.5-turbo'
     #event=json.dumps({"conversationId":m,"parentMessageId":t})
     def event_stream(m,q,t):
         for text in ask(m,q,t):  
