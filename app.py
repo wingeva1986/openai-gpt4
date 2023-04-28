@@ -1,5 +1,4 @@
 import quora
-import phind
 from time import sleep
 from flask import Flask, request, Response, render_template
 import threading
@@ -11,7 +10,7 @@ app = Flask(__name__)
 
 
     
-
+'''
 @app.route('/phindconv', methods=['POST'])
 def phindconv():
     json_data = request.get_json()
@@ -33,6 +32,7 @@ def phindconv():
         yield "data: [DONE]\n\n"
 
     return Response(event_stream(m,q,t), content_type='text/event-stream')
+'''
 
     
 @app.route('/conversation', methods=['POST'])
