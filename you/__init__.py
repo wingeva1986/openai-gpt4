@@ -9,19 +9,19 @@ from tls_client import Session
 class Completion:
     @staticmethod
     def create(
-        prompt: str,
-        page: int = 1,
-        count: int = 10,
-        safe_search: str = 'Moderate',
-        on_shopping_page: bool = False,
-        mkt: str = '',
-        response_filter: str = 'WebPages,Translations,TimeZone,Computation,RelatedSearches',
-        domain: str = 'youchat',
-        query_trace_id: str = None,
-        chat: list = None,
-        include_links: bool = False,
-        detailed: bool = False,
-        debug: bool = False,
+            prompt: str,
+            page: int = 1,
+            count: int = 10,
+            safe_search: str = 'Moderate',
+            on_shopping_page: bool = False,
+            mkt: str = '',
+            response_filter: str = 'WebPages,Translations,TimeZone,Computation,RelatedSearches',
+            domain: str = 'youchat',
+            query_trace_id: str = None,
+            chat: list = None,
+            include_links: bool = False,
+            detailed: bool = False,
+            debug: bool = False,
     ) -> dict:
         if chat is None:
             chat = []
@@ -57,8 +57,7 @@ class Completion:
             r'(?<=event: youChatSerpResults\ndata:)(.*\n)*?(?=event: )', response.text
         ).group()
         third_party_search_results = re.search(
-            r'(?<=event: thirdPartySearchResults\ndata:)(.*\n)*?(?=event: )', response.text
-        ).group()
+            r'(?<=event: thirdPartySearchResults\ndata:)(.*\n)*?(?=event: )', response.text).group()
         # slots                   = findall(r"slots\ndata: (.*)\n\nevent", response.text)[0]
 
         text = ''.join(re.findall(r'{\"youChatToken\": \"(.*?)\"}', response.text))
@@ -69,7 +68,7 @@ class Completion:
         }
 
         return {
-            'response': text.replace('\\n', '\n').replace('\\\\', '\\'),
+            'response': text.replace('\\n', '\n').replace('\\\\', '\\').replace('\\"', '"'),
             'links': loads(third_party_search_results)['search']['third_party_search_results']
             if include_links
             else None,
